@@ -28,7 +28,7 @@
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="{{route('home')}}">
+                <a class="navbar-item" href="{{route('main')}}">
                     Перейти на сайт
                 </a>
             </div>

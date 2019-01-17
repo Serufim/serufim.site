@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('main.main');
-})->name('home');
+})->name('main');
 Route::namespace('Web\Main')->group(function (){
     Route::get('/coupons', 'CouponController@index')->name('coupons');
     Route::get('/projects', 'ProjectController@index')->name('projects');
