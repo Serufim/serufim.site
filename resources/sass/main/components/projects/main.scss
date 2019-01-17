@@ -1,0 +1,25 @@
+
+.project-description{
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #fff;
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  transition: 1s;
+  bottom: 0;
+  cursor: pointer;
+}
+.project-wrapper{
+  height: calc(100% - 5px);
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+}
+.project-background{
+  background-color: #e6e6e6;
+  padding-top: 100%;
+  position: relative;
+  overflow: hidden;
+}

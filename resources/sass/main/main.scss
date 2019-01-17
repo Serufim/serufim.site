@@ -1,0 +1,7 @@
+@import "~bulma/bulma";
+@import "components/projects/main";
+.main-page__title{
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: center;
+}
