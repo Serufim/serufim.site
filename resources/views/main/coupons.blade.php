@@ -41,12 +41,12 @@
                 <tbody>
                 @foreach ($coupons as $coupon)
                     <tr class="coupon-table-row">
-                        <td class="coupon-table-row__type is-narrow">
+                        <td class="coupon-table-row__type is-narrow-tablet">
                             {{$coupon->type['name']}}</td>
-                        <td class="coupon-table-row__code is-narrow has-text-info">
+                        <td class="coupon-table-row__code is-narrow-tablet has-text-info">
                             {{$coupon->code}}
                         </td>
-                        <td class="coupon-table-row__price is-narrow has-text-centered-mobile" >
+                        <td class="coupon-table-row__price is-narrow-tablet has-text-centered-mobile" >
                             <p class="label is-hidden-tablet">Цена</p>
                             {{$coupon->price}}
                         </td>
@@ -54,10 +54,10 @@
                             <p class="label is-hidden-tablet">Без купона</p>
                             {{$coupon->actual_price}}
                         </td>
-                        <td class="coupon-table-row__value has-text-success is-narrow has-text-centered-mobile">
+                        <td class="coupon-table-row__value has-text-success is-narrow-tablet has-text-centered-mobile">
                             <p class="label is-hidden-tablet">Выгода</p>
                             {{$coupon->actual_price - $coupon->price}} (%)</td>
-                        <td class="coupon-table-row__description is-narrow">
+                        <td class="coupon-table-row__description is-narrow-tablet">
                             <p class="label is-hidden-tablet">Описание</p>
                             {{$coupon->description}}
                         </td>

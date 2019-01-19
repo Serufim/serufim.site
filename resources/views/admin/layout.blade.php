@@ -60,7 +60,7 @@
                 </ul>
             </li>
             <li>
-                <a class="{{Route::currentRouteName()=='coupons.index'?'is-active':null}}" href="{{route('coupons.index')}}" style="">Купоны БК</a>
+                <a class="{{Route::currentRouteName()=='coupons.index'?'is-active':null}}" href="{{route('coupons.index')}}" style="">Купоны</a>
                 <ul>
                     <li><a class="{{Route::currentRouteName()=='coupons.create'?'is-active':null}}" href="{{route('coupons.create')}}">Добавить новый</a></li>
                     <li><a class="{{Route::currentRouteName()=='coupon_types.index'?'is-active':null}}" href="{{route('coupon_types.index')}}">Типы купонов</a>
@@ -68,6 +68,7 @@
                             <li><a class="{{Route::currentRouteName()=='coupon_types.create'?'is-active':null}}" href="{{route('coupon_types.create')}}">Добавить</a></li>
                         </ul>
                     </li>
+                    <li><a class="{{Route::currentRouteName()=='coupons.create'?'is-active':null}}" href="{{route('coupons.create')}}">Купоны пользователей</a></li>
                 </ul>
             </li>
         </ul>
