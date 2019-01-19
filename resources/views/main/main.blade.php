@@ -1,4 +1,5 @@
 @extends('main.layout')
+@section('title', '@Serufim - Блог и Мастерская Сергея Уфимцева')
 
 @section('content')
     <section class="hero is-medium is-primary is-bold">

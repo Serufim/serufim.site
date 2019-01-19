@@ -1,4 +1,5 @@
 @extends('admin.layout')
+@section('title', 'Список купонов')
 
 @section('content')
     <h2 class="title">Купоны</h2>

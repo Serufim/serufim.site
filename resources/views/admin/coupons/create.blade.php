@@ -1,4 +1,5 @@
 @extends('admin.layout')
+@section('title', 'Создать купон')
 
 @section('content')
     @if(!isset($coupon))

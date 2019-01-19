@@ -1,7 +1,8 @@
 @extends('admin.layout')
+@section('title', 'Список купонов')
 
 @section('content')
-    <h2 class="title">Купоны</h2>
+    <h2 class="title">Типы купонов</h2>
     <table class="table is-hoverable is-fullwidth is-striped">
         <thead>
             <tr>

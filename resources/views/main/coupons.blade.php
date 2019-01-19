@@ -1,5 +1,5 @@
 @extends('main.layout')
-
+@section('title', 'Секретные купоны')
 @section('content')
     <section class="coupons-hero hero is-medium is-warning is-bold">
         <div class="hero-body">
