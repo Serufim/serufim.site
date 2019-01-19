@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Console\Commands;
-
+use App\User;
 use Illuminate\Console\Command;
 
 class add_admin extends Command
