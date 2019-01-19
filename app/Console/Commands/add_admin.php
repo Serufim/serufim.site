@@ -39,7 +39,7 @@ class add_admin extends Command
         $email = $this->argument('email');
         $password = $this->argument('password');
         $user = User::create([
-            'name' => '',
+            'name' => 'Serufim',
             'email' => $email,
             'password' => Hash::make($password),
         ]);
