@@ -36,11 +36,11 @@
             <div class="navbar-end">
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-                        Admin
+                        {{Auth::user()->name}}
                     </a>
                     <div class="navbar-dropdown">
                         <!--<hr class="navbar-divider">-->
-                        <a class="navbar-item">
+                        <a class="navbar-item" href="{{route('logout')}}">
                             Выход
                         </a>
                     </div>
@@ -54,15 +54,20 @@
         </p>
         <ul class="menu-list">
             <li>
-                <a class="is-active" href="{{route('projects.index')}}" style="">Проекты</a>
+                <a class="{{Route::currentRouteName()=='projects.index'?'is-active':null}}" href="{{route('projects.index')}}" style="">Проекты</a>
                 <ul>
-                    <li><a href="{{route('projects.create')}}">Добавить новый</a></li>
+                    <li><a class="{{Route::currentRouteName()=='projects.create'?'is-active':null}}" href="{{route('projects.create')}}">Добавить новый</a></li>
                 </ul>
             </li>
             <li>
-                <a class="" href="{{route('coupons.index')}}" style="">Купоны БК</a>
+                <a class="{{Route::currentRouteName()=='coupons.index'?'is-active':null}}" href="{{route('coupons.index')}}" style="">Купоны БК</a>
                 <ul>
-                    <li><a href="{{route('coupons.create')}}">Добавить новый</a></li>
+                    <li><a class="{{Route::currentRouteName()=='coupons.create'?'is-active':null}}" href="{{route('coupons.create')}}">Добавить новый</a></li>
+                    <li><a class="{{Route::currentRouteName()=='coupon_types.index'?'is-active':null}}" href="{{route('coupon_types.index')}}">Типы купонов</a>
+                        <ul>
+                            <li><a class="{{Route::currentRouteName()=='coupon_types.create'?'is-active':null}}" href="{{route('coupon_types.create')}}">Добавить</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
         </ul>

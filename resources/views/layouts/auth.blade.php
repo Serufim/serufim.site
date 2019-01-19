@@ -20,7 +20,6 @@
 </head>
 <body>
 <div id="app">
-    <h1 class="title is-1 has-text-centered">{{ config('app.name', '@Serufim') }}</h1>
     <main class="">
         @yield('content')
     </main>

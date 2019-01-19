@@ -45,9 +45,18 @@ Route::namespace('Web\Admin')
                 'update' => 'coupons.update',
                 'destroy' => 'coupons.destroy',
             ]]);
+            Route::resource('/coupon_types', "CouponTypeController",['names' => [
+                'index' => 'coupon_types.index',
+                'create' => 'coupon_types.create',
+                'store' => 'coupon_types.store',
+                'show' => 'coupon_types.show',
+                'edit' => 'coupon_types.edit',
+                'update' => 'coupon_types.update',
+                'destroy' => 'coupon_types.destroy',
+            ]]);
         });
 });
 
 Auth::routes();
-
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');

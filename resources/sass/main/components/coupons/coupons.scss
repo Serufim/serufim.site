@@ -1,0 +1,14 @@
+@import "coupons-table/coupon-table";
+@import "coupons-table/coupon-table-row";
+.coupons-hero{
+  margin-bottom: 1.5rem;
+}
+@media screen and (max-width: $tablet){
+  .coupons_title, .coupons_subtitle{
+    margin: 0 1rem;
+  }
+  .coupons-form{
+    margin: 0 1rem;
+  }
+}
+

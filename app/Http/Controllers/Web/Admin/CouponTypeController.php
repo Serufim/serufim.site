@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\CouponType;
-use Illuminate\Http\Request;
-use App\Coupon;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class CouponController extends Controller
+class CouponTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        return view('admin.coupons.list',["coupons"=>Coupon::all()]);
+        return view('admin.coupon_types.list',['types'=>CouponType::all()]);
     }
 
     /**
@@ -26,7 +25,7 @@ class CouponController extends Controller
      */
     public function create()
     {
-        return view('admin.coupons.create',['types'=>CouponType::all()]);
+        return view('admin.coupon_types.create');
     }
 
     /**
@@ -39,16 +38,11 @@ class CouponController extends Controller
     {
         //TODO:Так, ну валидация и все дела
         $validatedData = $request->validate([
-            'code' => 'string|required|max:255',
-            'description' => 'string|required',
-            'price' => 'integer|required',
-            'type_id' => 'integer|required',
-            'actual_price' => 'integer|nullable',
-            'extra' => 'string|nullable',
+            'name' => 'string|required|max:255',
         ]);
-        $coupon = new Coupon($validatedData);
+        $coupon= new CouponType($validatedData);
         $coupon->save();
-        return redirect()->route('coupons.index');
+        return redirect()->route('coupon_types.index');
     }
 
     /**
@@ -68,9 +62,9 @@ class CouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Coupon $coupon)
+    public function edit(CouponType $couponType)
     {
-        return view('admin.coupons.create',['coupon'=>$coupon,'types'=>CouponType::all()]);
+        return view('admin.coupon_types.edit',['type'=>$couponType]);
     }
 
     /**
@@ -80,19 +74,14 @@ class CouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Coupon $coupon)
+    public function update(Request $request, CouponType $couponType)
     {
         //TODO:Так, ну валидация и все дела
         $validatedData = $request->validate([
-            'code' => 'string|required|max:255',
-            'description' => 'string|required',
-            'price' => 'integer|required',
-            'type_id' => 'integer|required',
-            'actual_price' => 'integer|nullable',
-            'extra' => 'string|nullable',
+            'name' => 'string|required|max:255',
         ]);
-        $coupon->update($validatedData);
-        return redirect()->route('coupons.index');
+        $couponType->update($validatedData);
+        return redirect()->route('coupon_types.index');
     }
 
     /**
@@ -101,9 +90,9 @@ class CouponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Coupon $coupon)
+    public function destroy(CouponType $couponType)
     {
-        $coupon->delete();
-        return redirect()->route('coupons.index');
+        $couponType->delete();
+        return redirect()->route('coupon_types.index');
     }
 }

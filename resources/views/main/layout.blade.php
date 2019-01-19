@@ -37,6 +37,11 @@
             <a class="navbar-item" href="{{route('coupons')}}">
                 Секретные купоны
             </a>
+            @auth
+                <a class="navbar-item" href="{{route('admin')}}">
+                    Админка
+                </a>
+            @endauth
         </div>
 
         <div class="navbar-end">

@@ -2,15 +2,15 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-//@import 'variables';
+;
 
 // Bootstrap
 @import '~bulma/sass/utilities/all';
 @import '~bulma/sass/base/all';
 @import '~bulma/sass/elements/title';
 
-
+// Variables
+@import 'variables';
 .title{
   text-decoration: underline;
 }

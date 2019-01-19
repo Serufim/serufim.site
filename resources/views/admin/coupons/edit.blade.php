@@ -5,6 +5,7 @@
     <form method="POST" action="{{route('coupons.update',['coupon'=>$coupon])}}">
         @method("PUT")
         @csrf
+        {{$coupon->type_id}}
         <div class="columns is-multiline">
             <div class="field column is-6">
                 <label class="label">Код</label>
@@ -41,9 +42,5 @@
             <button type="submit" class="button is-success">Обновить информацию</button>
         </div>
     </form>
-    <form action="{{route('coupons.destroy',['coupon'=>$coupon])}}" method="POST">
-        @method('DELETE')
-        @csrf
-        <button type="submit" class="button is-danger">Удалить информацию</button>
-    </form>
+
 @endsection
