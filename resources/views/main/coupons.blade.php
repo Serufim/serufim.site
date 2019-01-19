@@ -56,7 +56,7 @@
                         </td>
                         <td class="coupon-table-row__value has-text-success is-narrow-tablet has-text-centered-mobile">
                             <p class="label is-hidden-tablet">Выгода</p>
-                            {{$coupon->actual_price - $coupon->price}} (%)</td>
+                            {{$coupon->actual_price - $coupon->price}}</td>
                         <td class="coupon-table-row__description is-narrow-tablet">
                             <p class="label is-hidden-tablet">Описание</p>
                             {{$coupon->description}}
