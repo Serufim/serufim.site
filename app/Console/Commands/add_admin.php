@@ -11,7 +11,7 @@ class add_admin extends Command
      *
      * @var string
      */
-    protected $signature = 'add:admin';
+    protected $signature = 'add:admin {email} {password}';
 
     /**
      * The console command description.
