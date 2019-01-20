@@ -13,59 +13,8 @@
             </div>
         </div>
     </section>
-    <section class="table">
-        <div class="container">
-            <h2 class="coupons_title title is-2 is-size-3-mobile">Подробная таблица</h2>
-            <p class="coupons_subtitle subtitle">Мы постоянно обновляем все данные</p>
-            <table class="coupon-table table is-hoverable is-narrow">
-                <thead class="is-hidden-mobile">
-                <tr>
-                    <th>Куда</th>
-                    <th>Купон</th>
-                    <th>Стоимость</th>
-                    <th>Без купона</th>
-                    <th>Выгода</th>
-                    <th>Описание</th>
-                </tr>
-                </thead>
-                <tfoot class="is-hidden-mobile">
-                <tr>
-                    <th>Куда</th>
-                    <th>Купон</th>
-                    <th>Стоимость</th>
-                    <th class="is-narrow">Без купона</th>
-                    <th>Выгода</th>
-                    <th>Описание</th>
-                </tr>
-                </tfoot>
-                <tbody>
-                @foreach ($coupons as $coupon)
-                    <tr class="coupon-table-row">
-                        <td class="coupon-table-row__type is-narrow-tablet">
-                            {{$coupon->type['name']}}</td>
-                        <td class="coupon-table-row__code is-narrow-tablet has-text-info">
-                            {{$coupon->code}}
-                        </td>
-                        <td class="coupon-table-row__price is-narrow-tablet has-text-centered-mobile" >
-                            <p class="label is-hidden-tablet">Цена</p>
-                            {{$coupon->price}}
-                        </td>
-                        <td class="coupon-table-row__actual-price has-text-danger has-text-centered-mobile">
-                            <p class="label is-hidden-tablet">Без купона</p>
-                            {{$coupon->actual_price}}
-                        </td>
-                        <td class="coupon-table-row__value has-text-success is-narrow-tablet has-text-centered-mobile">
-                            <p class="label is-hidden-tablet">Выгода</p>
-                            {{$coupon->actual_price - $coupon->price}}</td>
-                        <td class="coupon-table-row__description is-narrow-tablet">
-                            <p class="label is-hidden-tablet">Описание</p>
-                            {{$coupon->description}}
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
+    <section id="table" class="table">
+
     </section>
     <section class="container">
         <h3 class="coupons_title title is-3 is-size-4-mobile">Знаете купоны, которые не знаем мы???</h3>

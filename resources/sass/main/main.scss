@@ -1,6 +1,7 @@
 @import "~bulma/bulma";
 @import "components/projects/main";
 @import "components/coupons/coupons";
+@import "../variables";
 .main-page__title{
   display: flex;
   flex-flow: column nowrap;

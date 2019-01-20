@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('main.main');
 })->name('main');
+
 Route::namespace('Web\Main')->group(function (){
     Route::get('/coupons', 'CouponController@index')->name('coupons');
     Route::get('/projects', 'ProjectController@index')->name('projects');
