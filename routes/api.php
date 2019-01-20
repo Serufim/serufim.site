@@ -20,4 +20,5 @@ Route::namespace('Api')
     ->group(function (){
         Route::get('/coupons', 'CouponController@index');
         Route::get('/coupon_types', 'CouponTypeController@index');
+        Route::post('/send_coupon', 'CouponsFromReadersController@store');
     });

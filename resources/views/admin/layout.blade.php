@@ -68,7 +68,7 @@
                             <li><a class="{{Route::currentRouteName()=='coupon_types.create'?'is-active':null}}" href="{{route('coupon_types.create')}}">Добавить</a></li>
                         </ul>
                     </li>
-                    <li><a class="{{Route::currentRouteName()=='coupons.create'?'is-active':null}}" href="{{route('coupons.create')}}">Купоны пользователей</a></li>
+                    <li><a class="{{Route::currentRouteName()=='coupon_from_readers.index'?'is-active':null}}" href="{{route('coupon_from_readers.index')}}">Купоны пользователей</a></li>
                 </ul>
             </li>
         </ul>

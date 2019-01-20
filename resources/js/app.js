@@ -14,3 +14,5 @@ require('./bootstrap');
  */
 
 require('./components/CouponsTable');
+require('./components/CouponsForm');
+require('./components/CouponsReferal');

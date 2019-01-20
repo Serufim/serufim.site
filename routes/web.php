@@ -55,6 +55,10 @@ Route::namespace('Web\Admin')
                 'update' => 'coupon_types.update',
                 'destroy' => 'coupon_types.destroy',
             ]]);
+            Route::resource('/coupons_from_readers', "CouponsFromReadersController",['names' => [
+                'index' => 'coupon_from_readers.index',
+                'destroy' => 'coupon_from_readers.destroy',
+            ]]);
         });
 });
 

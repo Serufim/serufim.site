@@ -1,0 +1,32 @@
+.coupons_referal-block{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+.coupons_referal-block__coupon{
+  border: 2px dashed $grey-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 45px;
+  font-weight: 600;
+  color: $dark;
+  margin-right: 10px;
+}
+.coupons_referal-descriptions{
+  width: 100%;
+}
+.coupons_referal-descriptions{
+  margin-top: 0.5rem;
+}
+.coupons_referal-descriptions__text{
+  margin-bottom: 0.5rem;
+}
+@media screen and (max-width: $tablet){
+    .coupons_referal-block{
+    padding: 0 1rem;
+  }
+}
