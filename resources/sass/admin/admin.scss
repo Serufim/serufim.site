@@ -14,3 +14,9 @@
 @import "components/admin-header";
 @import "components/admin-page";
 @import "components/admin-panel";
+
+@media screen and (max-width: $tablet){
+  .container--with-paddings{
+    padding: 0 1.5rem;
+  }
+}

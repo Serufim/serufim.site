@@ -1,0 +1,67 @@
+.coupon{
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.coupon__code{
+  //width: 50%;
+  margin-bottom: 0.5rem!important;
+}
+.coupon__type{
+  //width: 50%;
+  align-self: center;
+  text-align: right;
+  margin-bottom: 0.5rem!important;
+}
+.coupon__description{
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.coupon__extra{
+  width: 100%;
+}
+.coupon__price, .coupon__actual_price, .coupon__value{
+  margin-bottom: 0.5rem;
+}
+.coupon-filters{
+
+}
+.coupon-filters-block{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.coupon-filters__type{
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+.coupon-filters__select{
+  width: 100%;
+}
+.coupon-filter{
+  display: flex;
+  flex-flow: column;
+}
+.coupon-filters_toogle{
+  margin-bottom: 1.5rem;
+}
+.coupons{
+  display: flex;
+  justify-content: space-between;
+  flex-flow:row wrap;
+}
+@media screen and (min-width: 599px){
+  .coupon{
+    width: calc(50% - 0.75rem);
+  }
+  .coupon__extra{
+    display: none;
+  }
+  .coupon-filters{
+    width: calc(50% - 0.75rem);
+    margin: 0 auto;
+  }
+}

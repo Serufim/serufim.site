@@ -13,10 +13,10 @@
             </div>
         </div>
     </section>
-    <section id="table" class="table">
-    </section>
-    <section id="coupon_ref"></section>
-    <div id="coupon_form">
-
+    <div class="container container--with-paddings">
+        <section id="table" class="table">
+        </section>
+        <section id="coupon_ref"></section>
+        <div id="coupon_form"></div>
     </div>
 @endsection

@@ -1,3 +1,9 @@
 .admin-header{
   grid-area: admin-header;
+  @extend .navbar;
+  @extend .has-shadow;
+  @extend .is-spaced;
+}
+.admin-header__navbar{
+  @extend .navbar-brand;
 }

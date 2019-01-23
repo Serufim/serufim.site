@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom';
 export  default class CouponsTable extends Component{
     constructor(props){
         super(props);
+        this.state={
+            successfull:null
+        }
+        this.copyRef = this.copyRef.bind(this)
     }
     copyRef(){
         // Выборка ссылки с электронной почтой
@@ -15,31 +19,37 @@ export  default class CouponsTable extends Component{
         try {
             // Теперь, когда мы выбрали текст ссылки, выполним команду копирования
             var successful = document.execCommand('copy');
-            var msg = successful ? 'successful' : 'unsuccessful';
+            successful? this.setState({successfull:true}):this.setState({successfull:false});
+            setTimeout(()=>this.setState({successfull:null}),2000)
         } catch(err) {
-            console.log('Oops, unable to copy');
+            this.setState({successfull:false});
+            setTimeout(()=>this.setState({successfull:null}),2000)
         }
-
-        // Снятие выделения - ВНИМАНИЕ: вы должны использовать
-        // removeRange(range) когда это возможно
         window.getSelection().removeAllRanges();
     }
 
     render() {
+        const {successfull} = this.state;
         return (
             <div className="coupons_referal-container container">
                 <h3 className="coupons_title title is-3 is-size-4-mobile">Пригодились купоны???</h3>
                 <p className="coupons_subtitle subtitle">Не забудьте сказать спасибо</p>
                 <div className="coupons_referal-block">
-                    <span className="coupons_referal-block__coupon">
-                        CWZPA7
-                    </span>
-                    <button className="coupons_referal-block__copy-button button is-medium" onClick={this.copyRef}>
-                         <span className="icon">
-                            <i className="fas fa-copy"></i>
+                    <div className="coupons_referal-block__wrapper">
+                        <span className={`coupons_referal-block__coupon ${successfull===true?"coupon-success":null} ${successfull===false?"coupon-danger":null}`}>
+                            CWZPA7
                         </span>
-                        <span>Копировать</span>
-                    </button>
+                        <button className="coupons_referal-block__copy-button button is-medium" onClick={this.copyRef}>
+                             <span className="icon">
+                                <i className="fas fa-copy"></i>
+                            </span>
+                            <span>Копировать</span>
+                        </button>
+                    </div>
+                    <p className={`coupons_referal-block__copy-helper ${successfull===true?"has-text-success":null} ${successfull===false?"has-text-danger":null}`}>
+                        {successfull===true?"Успешно скопированно":null}
+                        {successfull===false?"Успешно скопированно":null}
+                    </p>
                     <div className="coupons_referal-descriptions">
                         <p className="coupons_referal-descriptions__text">
                             Вставьте данный реферальный код в вашем приложении burger king и вы получите карштофель фри

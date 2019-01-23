@@ -7,13 +7,13 @@
         <thead>
             <tr>
                 <th>Название</th>
-                <th>ХЗ</th>
+                <th></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th>Название</th>
-                <th>ХЗ</th>
+                <th></th>
             </tr>
         </tfoot>
         <tbody>

@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">
 </head>
 <body>
-    <nav class="admin-header navbar has-shadow is-spaced" role="navigation" aria-label="main navigation">
-        <div class="container container--with-paddings">
+<div class="admin-layout">
+    <header class="container">
+        <nav class="admin-header" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="{{route('admin')}}">
                     <b>@Serufim</b>
@@ -22,8 +23,9 @@
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
-            </a>
+                </a>
             </div>
+
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
                     <a class="navbar-item" href="{{route('main')}}">
@@ -45,11 +47,11 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-    <div class="container container--with-paddings">
-        <div class="admin-page columns">
-            <aside class="admin-menu column is-4 menu">
+        </nav>
+    </header>
+    <div class="container">
+        <div class="columns">
+            <aside class="column is-4 dmin-panel menu">
                 <p class="menu-label">
                     Основные
                 </p>
@@ -74,12 +76,11 @@
                     </li>
                 </ul>
             </aside>
-            <section class="admin-content column is-8">
+            <section class="column is-8 admin-page">
                 @yield('content')
             </section>
         </div>
     </div>
-
 </div>
 </body>
 </html>
