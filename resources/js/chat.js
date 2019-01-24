@@ -15,7 +15,7 @@ let socket = null;
 document.querySelector('#enter').addEventListener('click', (e) => {
     e.preventDefault();
     const user_name = document.querySelector('#username').value;
-    socket = io('http://localhost:3000/chat', {query: {name: user_name}});
+    socket = io('http://serufim.site:3000/chat', {query: {name: user_name}});
     socket.on('connect', () => console.log('Подключено'));
     socket.on('disconnect', () => console.log('Успешно отключено'));
     socket.on('reply', (data) => renderMessages(data));
