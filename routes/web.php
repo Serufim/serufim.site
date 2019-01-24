@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::namespace('Web\Main')->group(function (){
     Route::get('/coupons', 'CouponController@index')->name('coupons');
+    Route::get('/chat', 'ChatController@index')->name('chat');
     Route::get('/projects', 'ProjectController@index')->name('projects');
 
     Route::get('/projects/{project}', 'ProjectController@show')->name('projects.view');

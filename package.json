@@ -21,10 +21,12 @@
         "react-dom": "^16.2.0",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
-        "sass-loader": "^7.1.0"
+        "sass-loader": "^7.1.0",
+        "vue-template-compiler": "^2.5.22"
     },
     "dependencies": {
         "bulma": "^0.7.2",
-        "react-responsive": "^6.0.1"
+        "react-responsive": "^6.0.1",
+        "socketio": "^1.0.0"
     }
 }
