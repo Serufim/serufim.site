@@ -32,7 +32,7 @@ export  default class CouponsTable extends Component{
         const {successfull} = this.state;
         return (
             <div className="coupons_referal-container container">
-                <h3 className="coupons_title title is-3 is-size-4-mobile">Пригодились купоны???</h3>
+                <h3 className="coupons_title title is-3 is-size-4-mobile">Пригодились купоны?</h3>
                 <p className="coupons_subtitle subtitle">Не забудьте сказать спасибо</p>
                 <div className="coupons_referal-block">
                     <div className="coupons_referal-block__wrapper">
@@ -52,7 +52,7 @@ export  default class CouponsTable extends Component{
                     </p>
                     <div className="coupons_referal-descriptions">
                         <p className="coupons_referal-descriptions__text">
-                            Вставьте данный реферальный код в вашем приложении burger king и вы получите карштофель фри
+                            Вставьте данный реферальный код в вашем приложении burger king и вы получите картофель фри
                             всего за 1 рубль.
                         </p>
                         <p className="coupons_referal-descriptions__text">

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import io from 'socket.io-client'
 
-var socket = io('https://serufim.site/chat');
+
 export default class Chat extends Component{
     constructor(props){
         super(props);
@@ -11,18 +11,22 @@ export default class Chat extends Component{
             messages:[],
             message:"",
             name:"",
+            users:0,
+            slaves:0,
             loginError:false,
             loginErrorMessage:"",
             needScroll:false,
         }
         this.handleChandge = this.handleChandge.bind(this)
         this.login = this.login.bind(this)
+        this.updateUsers = this.updateUsers.bind(this)
         this.sendMessage = this.sendMessage.bind(this)
     }
     componentDidMount() {
         const {messages} = this.state;
         socket.on('connect',()=>console.log('Подключено'));
         socket.on('disconnect',()=>console.log('Отключено'));
+        socket.on('user_stat',(data)=>this.updateUsers(data));
         socket.on('login_error',(data)=>this.setState({loginError:true,loginErrorMessage:data.message}));
         socket.on('login_success',()=>this.setState({login:true}));
         socket.on('reply',(data)=>{
@@ -40,7 +44,9 @@ export default class Chat extends Component{
             elem.scrollTop = elem.scrollHeight;
         }
     }
-
+    updateUsers(data){
+        this.setState({users:data.users,slaves:data.slaves})
+    }
     handleChandge(field,e){
         let {state} = this;
         state[field] = e.target.value;
@@ -62,11 +68,19 @@ export default class Chat extends Component{
         this.setState({message:"",needScroll:true});
     }
     render() {
-        const {login, name, messages, message, loginError, loginErrorMessage} = this.state;
+        const {login, name, messages, message, loginError, loginErrorMessage, users, slaves} = this.state;
         return(
             <div className="chat container container--with-paddings">
                 <h1 className="title is-1 has-text-centered">@Seruchat</h1>
                 <p className="subtitle has-text-centered">Прогрессивный веб чат</p>
+                <div className="chat__slaves-count" style={{textAlign:"right"}}>
+                    <span className="chat__slaves-connected has-text-grey-light">Подключено</span>
+
+                    <p className="chat__slaves-counter">
+                        <span className="has-text-grey-light">{slaves}</span>/<span className="has-text-info">{users}</span>
+                    </p>
+                    <span className="chat__slaves-connected has-text-info" style={{textAlign:"left"}}>В чате</span>
+                </div>
                 <div className="chat__box">
                     {messages.map((message, i) => <div key={i} className="chat__message message box"><span
                         className={message.admin?"has-text-danger":"has-text-info"}>{message.name}</span> {message.message}</div>)}
@@ -108,5 +122,6 @@ export default class Chat extends Component{
     }
 }
 if (document.getElementById('chat')) {
+    var socket = io('https://serufim.site/chat');
     ReactDOM.render(<Chat />, document.getElementById('chat'));
 }

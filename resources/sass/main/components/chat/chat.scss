@@ -20,3 +20,12 @@
 .chat__message:not(:last-child){
     margin-bottom: 0.5rem;
 }
+.chat__slaves-count{
+   display: flex;
+    justify-content: space-between;
+    width: 300px;
+    margin: 0 auto;
+}
+.chat__slaves-connected{
+    width: 130px;
+}
