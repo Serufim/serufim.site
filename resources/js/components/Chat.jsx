@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import io from 'socket.io-client'
 
-var socket = io('http://localhost:3000/chat');
+var socket = io('https://serufim.site/chat');
 export default class Chat extends Component{
     constructor(props){
         super(props);
