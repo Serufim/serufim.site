@@ -29,6 +29,9 @@ export default class Chat extends Component{
         socket.on('user_stat',(data)=>this.updateUsers(data));
         socket.on('login_error',(data)=>this.setState({loginError:true,loginErrorMessage:data.message}));
         socket.on('login_success',()=>this.setState({login:true}));
+        socket.on('connect_failed', function() {
+            document.write("Sorry, there seems to be an issue with the connection!");
+        });
         socket.on('reply',(data)=>{
             messages.push(data);
             this.setState({messages:messages})
@@ -121,7 +124,7 @@ export default class Chat extends Component{
         )
     }
 }
-if (document.getElementById('chat')) {
+if (document.getElementById('chat')){
     var socket = io('https://serufim.site/chat');
     ReactDOM.render(<Chat />, document.getElementById('chat'));
 }
