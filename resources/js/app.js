@@ -16,6 +16,7 @@ require('./bootstrap');
 require('./components/CouponsTable');
 require('./components/CouponsForm');
 require('./components/CouponsReferal');
+require('./components/Chat');
 document.addEventListener('DOMContentLoaded', () => {
 
     // Get all "navbar-burger" elements

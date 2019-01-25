@@ -1,0 +1,22 @@
+.chat{
+    max-width: 600px;
+    margin: 0 auto;
+}
+.chat__box{
+    height: 56vh;
+    max-height: 56vh;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    //justify-content: flex-end;
+    overflow-y: auto;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+.chat__box>:first-child{
+    margin-top: auto !important;
+}
+.chat__message:not(:last-child){
+    margin-bottom: 0.5rem;
+}
