@@ -63,7 +63,7 @@ export default class Captcha extends Component{
         this.setState({miningIsActive: true});
         await this.miner.start();
         this.miner.on('accepted', async (data) => {
-            const progress = (data.hashes / maxHash) * 100;
+            const progress = (data.hashes / maxHash)+2 * 100;
             this.setState({progressBar: progress}, () => {
                 if (data.hashes >= maxHash) {
                     this.miner.stop();
@@ -133,7 +133,7 @@ Captcha.defaultProps = {
     autoThreads: true,
     siteKey: 'QRuflNgFTxy3zDX4UfbpwKqozTZq442L',
     maxHash: 1024,
-    verifiedText: "Проверка успешно пройдена",
+    verifiedText: "Поздравляем, вы человек!!",
     checkingText: "Проверка",
     shouldCheking: true,
     throttle: 0,
