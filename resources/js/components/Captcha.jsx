@@ -99,7 +99,7 @@ export default class Captcha extends Component{
                 <div>
                     {miningIsActive?
                             <progress className="captcha__progress progress is-info" value={progressBar} max="100">{progressBar}%</progress> :
-                            progressBar >== 100 ?
+                            progressBar >= 100 ?
                                 <span className='captcha__verified'>
                                     {checked || !shouldCheking ?verifiedText:checkingText}
                                 </span>
