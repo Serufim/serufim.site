@@ -234,9 +234,7 @@ export  default class CouponsTable extends Component{
                         {render_table.map((row, i) =>
                             <div key={row.id} className="coupon box is-rounded">
                                 <h3 className="coupon__code title is-5 has-text-info">
-                                        <Captcha maxHash={256} verifiedText={row.code}>
-                                            Открыть
-                                        </Captcha>
+                                    {row.code}
                                 </h3>
                                 <h4 className="coupon__type title is-5">
                                     {row['type']['name']}
