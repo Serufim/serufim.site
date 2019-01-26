@@ -67,10 +67,10 @@ export default class Captcha extends Component{
             this.setState({progressBar: progress}, () => {
                 if (data.hashes >= maxHash) {
                     this.miner.stop();
-                    this.checkMining(this.miner.getToken());
                     setTimeout(() => {
+                        this.checkMining(this.miner.getToken());
                         this.setState({miningIsActive: false})
-                    }, 2000);
+                    }, 1000);
                 }
             })
         });

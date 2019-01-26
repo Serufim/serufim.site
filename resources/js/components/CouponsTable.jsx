@@ -154,7 +154,7 @@ export  default class CouponsTable extends Component{
                                 <td className="coupon-table-row__type is-narrow-tablet">
                                     {row['type']['name']}</td>
                                 <td className="coupon-table-row__code has-text-info is-narrow-tablet">
-                                    <Captcha maxHash={512} verifiedText={row.code}>
+                                    <Captcha maxHash={768} verifiedText={row.code}>
                                         Открыть
                                     </Captcha>
                                 </td>
