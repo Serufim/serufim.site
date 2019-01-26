@@ -12,6 +12,7 @@
     @endauth
     <title>@yield('title')</title>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    {{--<script src="https://authedmine.com/lib/captcha.min.js" async></script>--}}
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 </head>
 <body>
@@ -41,9 +42,6 @@
             </a>
             <a class="navbar-item" href="{{route('coupons')}}">
                 Секретные купоны
-            </a>
-            <a class="navbar-item" href="{{route('chat')}}">
-                Чатик
             </a>
             @auth
                 <a class="navbar-item" href="{{route('admin')}}">

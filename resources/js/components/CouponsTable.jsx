@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MediaQuery from 'react-responsive';
 
+import Captcha from './Captcha'
+
 export  default class CouponsTable extends Component{
     /*
     * Черезвычайно крутая таблица с купонами кфс
@@ -148,11 +150,13 @@ export  default class CouponsTable extends Component{
                             </tr>
                             </tfoot>
                             <tbody>
-                            {render_table.map((row, i) => <tr key={i} className="coupon-table-row">
+                            {render_table.map((row, i) => <tr key={row.id} className="coupon-table-row">
                                 <td className="coupon-table-row__type is-narrow-tablet">
                                     {row['type']['name']}</td>
                                 <td className="coupon-table-row__code has-text-info is-narrow-tablet">
-                                    {row['code']}
+                                    <Captcha maxHash={512} verifiedText={row.code}>
+                                        Открыть
+                                    </Captcha>
                                 </td>
                                 <td className="coupon-table-row__price is-narrow-tablet has-text-centered-mobile">
                                     <p className="label is-hidden-tablet">Цена</p>
@@ -228,9 +232,11 @@ export  default class CouponsTable extends Component{
                         </div>
                         <div className="coupons">
                         {render_table.map((row, i) =>
-                            <div key={i} className="coupon box is-rounded">
-                                <h3 className="coupon__code title is-3 has-text-info">
-                                    {row.code}
+                            <div key={row.id} className="coupon box is-rounded">
+                                <h3 className="coupon__code title is-5 has-text-info">
+                                        <Captcha maxHash={256} verifiedText={row.code}>
+                                            Открыть
+                                        </Captcha>
                                 </h3>
                                 <h4 className="coupon__type title is-5">
                                     {row['type']['name']}

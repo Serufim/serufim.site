@@ -6,7 +6,16 @@
 }
 .coupon__code{
   //width: 50%;
+  flex-grow:1;
+  box-sizing: border-box;
+  padding-right: 10px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
   margin-bottom: 0.5rem!important;
+}
+.coupon__code .captcha{
+  margin-bottom: 0;
 }
 .coupon__type{
   //width: 50%;

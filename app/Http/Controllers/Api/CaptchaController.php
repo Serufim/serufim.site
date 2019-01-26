@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\CouponsFromReader;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Coupon;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class CouponsFromReadersController extends Controller
+class CaptchaController extends Controller
 {
-    public function store(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return CouponResource
+     */
+    public function check(Request $request)
     {
         //TODO:Так, ну валидация и все дела
         $validatedData = $request->validate([
-            'message' => 'required|max:255',
             'token' => 'required|max:255',
             'hashes' => 'required|max:255',
         ]);
@@ -36,19 +39,13 @@ class CouponsFromReadersController extends Controller
             $response = json_decode(file_get_contents($url, false, $post_context));
 
             if ($response && $response->success) {
-                $project = new CouponsFromReader($validatedData);
-                $project->created_at = Carbon::now();
-                $project->save();
                 return ['status'=>'success'];
             }else{
-                return ['status'=>'Обломился токен'];
+                return ['status'=>'failed'];
             }
-
         }catch (\Exception $exception){
-            return ['status'=>$exception->getMessage()];
+            return ['status'=>'failed'];
         }
-        return ['status'=>'хз просто до конца дошел'];
-
-
+        return ['status'=>'success'];
     }
 }
