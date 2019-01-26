@@ -62,7 +62,7 @@ export default class CouponsTable extends Component {
                             </div>
                             <p className={`help ${status === "error" ? "is-danger" : null} ${status === "success" ? "is-success" : null}`}>{status === "error" ? "Произошла ошибка, попробуйте позже" : null} {status === "success" ? "Форма успешно отправлена" : null}</p>
                         </div>
-                        <Captcha ref={this.childRef} maxHash={256} shouldCheking={false} onComplete={(token,hashes)=>
+                        <Captcha ref={this.childRef} maxHash={512} shouldCheking={false} onComplete={(token,hashes)=>
                             this.setState({
                                 verified:true,
                                 token:token,
