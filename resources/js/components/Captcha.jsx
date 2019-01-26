@@ -19,7 +19,7 @@ export default class Captcha extends Component{
     }
     reloadCaptcha() {
         this.setState({
-            progressBar: 0,
+            progressBar: 5,
             miningIsActive: false,
             minerIsReady: false,
             checked: false,
@@ -63,7 +63,7 @@ export default class Captcha extends Component{
         this.setState({miningIsActive: true});
         await this.miner.start();
         this.miner.on('accepted', async (data) => {
-            const progress = 2 + (data.hashes / maxHash) * 100;
+            const progress = 5 + (data.hashes / maxHash) * 100;
             this.setState({progressBar: progress}, () => {
                 if (data.hashes >= maxHash) {
                     this.miner.stop();
