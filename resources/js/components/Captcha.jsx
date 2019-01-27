@@ -38,6 +38,7 @@ export default class Captcha extends Component{
                 loadScript(minerUrl, (err,script) => {
                     if(err){
                         this.setState({hasAddblock:true});
+                        return
                     }
                     this.setState({minerIsReady:true});
                     return resolve(window.CoinHive.Token(siteKey, maxHash));
