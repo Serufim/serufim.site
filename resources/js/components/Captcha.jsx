@@ -60,20 +60,28 @@ export default class Captcha extends Component{
 
     async startMining() {
         const {maxHash}=this.props;
+        var minerInterval;
         this.setState({miningIsActive: true});
         await this.miner.start();
-        this.miner.on('accepted', async (data) => {
-            const progress = 5 + (data.hashes / maxHash) * 100;
-            this.setState({progressBar: progress}, () => {
-                if (data.hashes >= maxHash) {
-                    this.miner.stop();
+        this.miner.on('open', async (data) => {
+            minerInterval= setInterval(()=>{
+                const progress = 5 + (this.miner.getTotalHashes(true) / maxHash) * 100;
+                this.setState({progressBar: progress}, )
+            },500);
+
+        });
+        this.miner.on('accepted',async (data) => {
+            if (data.hashes >= maxHash) {
+                clearInterval(minerInterval);
+                this.miner.stop();
+                this.setState({progressBar: 100},()=>{
                     setTimeout(() => {
                         this.checkMining(this.miner.getToken());
                         this.setState({miningIsActive: false})
                     }, 1000);
-                }
-            })
-        });
+                });
+            }
+        })
     }
     checkMining(token){
         const {maxHash,shouldCheking}=this.props;
