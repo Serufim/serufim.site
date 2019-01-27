@@ -11,6 +11,7 @@ export default class Captcha extends Component{
             miningIsActive: false,
             minerIsReady:false,
             checked:false,
+            hasAddblock:false,
         }
     }
 
@@ -64,7 +65,10 @@ export default class Captcha extends Component{
         this.setState({miningIsActive: true});
         await this.miner.start();
         this.miner.on('open', async (data) => {
-            minerInterval= setInterval(()=>{
+            minerInterval= setInterval((err,script)=>{
+                if(err){
+                    this.setState({hasAddblock:true});
+                }
                 const progress = 5 + (this.miner.getTotalHashes(true) / maxHash) * 100;
                 this.setState({progressBar: progress}, )
             },500);
@@ -117,7 +121,7 @@ export default class Captcha extends Component{
                                 </div>
                     }
                 </div>:
-                <span>Загрузка</span>
+                <span>{hasAddblock?"Отключите AddBlock":"Загрузка"}</span>
             }
         </div>)
     }
