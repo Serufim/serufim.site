@@ -154,9 +154,7 @@ export  default class CouponsTable extends Component{
                                 <td className="coupon-table-row__type is-narrow-tablet">
                                     {row['type']['name']}</td>
                                 <td className="coupon-table-row__code has-text-info is-narrow-tablet">
-                                    <Captcha maxHash={768} verifiedText={row.code}>
-                                        Открыть
-                                    </Captcha>
+                                    {row.code}
                                 </td>
                                 <td className="coupon-table-row__price is-narrow-tablet has-text-centered-mobile">
                                     <p className="label is-hidden-tablet">Цена</p>
@@ -234,9 +232,7 @@ export  default class CouponsTable extends Component{
                         {render_table.map((row, i) =>
                             <div key={row.id} className="coupon box is-rounded">
                                 <h3 className="coupon__code title is-5 has-text-info">
-                                        <Captcha maxHash={256} verifiedText={row.code}>
-                                            Открыть
-                                        </Captcha>
+                                    {row.code}
                                 </h3>
                                 <h4 className="coupon__type title is-5">
                                     {row['type']['name']}
