@@ -104,7 +104,7 @@ export default class Captcha extends Component{
 
     }
     render() {
-        const {miningIsActive, progressBar,minerIsReady,checked, shouldCheking} = this.state;
+        const {miningIsActive, progressBar,minerIsReady,checked, shouldCheking, hasAddblock} = this.state;
         const {verifiedText,checkingText} = this.props;
         return(<div className="captcha">
             {minerIsReady?
@@ -121,7 +121,7 @@ export default class Captcha extends Component{
                                 </div>
                     }
                 </div>:
-                <span>{hasAddblock?"Отключите AddBlock":"Загрузка"}</span>
+                <span>{hasAddblock?"У вас AddBlock":"Загрузка"}</span>
             }
         </div>)
     }
