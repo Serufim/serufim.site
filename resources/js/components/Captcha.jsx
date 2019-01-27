@@ -35,7 +35,10 @@ export default class Captcha extends Component{
         }
         if(!window.CoinHive)
             this.miner = await new Promise(resolve => {
-                loadScript(minerUrl, () => {
+                loadScript(minerUrl, (err,script) => {
+                    if(err){
+                        this.setState({hasAddblock:true});
+                    }
                     this.setState({minerIsReady:true});
                     return resolve(window.CoinHive.Token(siteKey, maxHash));
                 })
@@ -65,10 +68,8 @@ export default class Captcha extends Component{
         this.setState({miningIsActive: true});
         await this.miner.start();
         this.miner.on('open', async (data) => {
-            minerInterval= setInterval((err,script)=>{
-                if(err){
-                    this.setState({hasAddblock:true});
-                }
+            minerInterval= setInterval(()=>{
+
                 const progress = 5 + (this.miner.getTotalHashes(true) / maxHash) * 100;
                 this.setState({progressBar: progress}, )
             },500);
