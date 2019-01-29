@@ -26,7 +26,11 @@ export  default class CouponsTable extends Component{
     }
     componentWillMount() {
         axios.get('/api/coupons').then(resp=>{
-            resp.data.data.forEach(item=>item.value = item.actual_price - item.price);
+            resp.data.data.forEach(item=>{
+                let percent = this.calculate_percent(item.actual_price, item.price);
+                console.log(percent)
+                item.value = percent;
+            });
             this.setState({table:resp.data.data,render_table:resp.data.data,loading:false})
         });
         axios.get('/api/coupon_types').then(resp=>{
@@ -36,14 +40,20 @@ export  default class CouponsTable extends Component{
     toogleFilter(){
         this.setState({filters_open:!this.state.filters_open});
     }
-    calculate_value(price,actual_price){
+    calculate_percent(price,actual_price){
         let value = actual_price - price;
         let percent = 0;
         if(value > 0){
             percent = value / (actual_price / 100);
         }else{
-            percent = value / (price * 100) * -1;
+            percent = 100 - price / (actual_price / 100);
         }
+
+        return percent
+    }
+    calculate_value(price,actual_price){
+        let value = actual_price - price;
+        let percent = this.calculate_percent(price,actual_price);
         return `${value} (${percent.toFixed(0)}%)`
     }
     sort_table(field, order){
@@ -94,7 +104,7 @@ export  default class CouponsTable extends Component{
                     <MediaQuery query="(min-device-width: 1024px)">
 
                         <table className="coupon-table table is-hoverable ">
-                            <thead className="is-hidden-mobile">
+                            <thead>
                             <tr>
                                 <th className="coupon-table__th">
                                     <div className="select">
@@ -106,47 +116,58 @@ export  default class CouponsTable extends Component{
                                     </div>
                                 </th>
                                 <th className="coupon-table__th">Купон</th>
-                                <th className="coupon-table__th"><span style={{marginRight: "5px"}}>Стоимость</span>
-                                    <a onClick={(e) => this.sort_table('price', 'asc')}
-                                       className={sortingMethod === "price-asc" ? " has-text-success" : " has-text-grey-light"}>
-                                        <i className="fas fa-caret-up"/>
-                                    </a>
-                                    <a onClick={(e) => this.sort_table('price', 'desc')}
-                                       className={sortingMethod === "price-desc" ? " has-text-success" : " has-text-grey-light"}>
-                                        <i className="fas fa-caret-down"/>
-                                    </a>
+                                <th className="coupon-table__th">
+                                    <div className="coupon-table__th-wrapper"> <span
+                                        className="coupon-table__th-title coupon-table__th-title--with-filters">Цена</span>
+                                        <a onClick={(e) => this.sort_table('price', 'desc')}
+                                           className={sortingMethod === "price-desc" ? " has-text-success" : " has-text-grey-light"}>
+                                            <i className="fas fa-caret-up"/>
+                                        </a>
+                                        <a onClick={(e) => this.sort_table('price', 'asc')}
+                                           className={sortingMethod === "price-asc" ? " has-text-success" : " has-text-grey-light"}>
+                                            <i className="fas fa-caret-down"/>
+                                        </a>
+                                    </div>
                                 </th>
-                                <th className="coupon-table__th"><span style={{marginRight: "5px"}}>Без купона</span>
-                                    <a onClick={(e) => this.sort_table('actual_price', 'asc')}
-                                       className={sortingMethod === "actual_price-asc" ? " has-text-success" : " has-text-grey-light"}>
+                                <th className="coupon-table__th">
+                                    <div className="coupon-table__th-wrapper">
+                                        <span className="coupon-table__th-title coupon-table__th-title--with-filters">Без купона</span>
+                                        <a onClick={(e) => this.sort_table('actual_price', 'desc')}
+                                          className={sortingMethod === "actual_price-desc" ? " has-text-success" : " has-text-grey-light"}>
                                         <i className="fas fa-caret-up"/>
-                                    </a>
-                                    <a onClick={(e) => this.sort_table('actual_price', 'desc')}
-                                       className={sortingMethod === "actual_price-desc" ? " has-text-success" : " has-text-grey-light"}>
-                                        <i className="fas fa-caret-down"/>
-                                    </a>
+                                        </a>
+                                        <a onClick={(e) => this.sort_table('actual_price', 'asc')}
+                                           className={sortingMethod === "actual_price-asc" ? " has-text-success" : " has-text-grey-light"}>
+                                            <i className="fas fa-caret-down"/>
+                                        </a>
+                                    </div>
                                 </th>
-                                <th className="coupon-table__th"><span style={{marginRight: "5px"}}>Выгода</span>
-                                    <a onClick={(e) => this.sort_table('value', 'asc')}
-                                       className={sortingMethod === "value-asc" ? " has-text-success" : " has-text-grey-light"}>
-                                        <i className="fas fa-caret-up"/>
-                                    </a>
-                                    <a onClick={(e) => this.sort_table('value', 'desc')}
-                                       className={sortingMethod === "value-desc" ? " has-text-success" : " has-text-grey-light"}>
-                                        <i className="fas fa-caret-down"/>
-                                    </a>
+                                <th className="coupon-table__th">
+                                    <div className="coupon-table__th-wrapper"><span
+                                        className="coupon-table__th-title coupon-table__th-title--with-filters">Выгода</span>
+                                        <a onClick={(e) => this.sort_table('value', 'asc')}
+                                           className={sortingMethod === "value-asc" ? " has-text-success" : " has-text-grey-light"}>
+                                            <i className="fas fa-caret-up"/>
+                                        </a>
+                                        <a onClick={(e) => this.sort_table('value', 'desc')}
+                                           className={sortingMethod === "value-desc" ? " has-text-success" : " has-text-grey-light"}>
+                                            <i className="fas fa-caret-down"/>
+                                        </a>
+                                    </div>
                                 </th>
                                 <th className="coupon-table__th">Описание</th>
+                                <th className="coupon-table__th is-narrow-tablet">Важно</th>
                             </tr>
                             </thead>
-                            <tfoot className="is-hidden-mobile">
+                            <tfoot className="">
                             <tr>
-                                <th>Куда</th>
-                                <th>Купон</th>
-                                <th>Стоимость</th>
-                                <th>Без купона</th>
-                                <th>Выгода</th>
-                                <th>Описание</th>
+                                <th className="coupon-table__th">Куда</th>
+                                <th className="coupon-table__th">Купон</th>
+                                <th className="coupon-table__th">Стоимость</th>
+                                <th className="coupon-table__th">Без купона</th>
+                                <th className="coupon-table__th">Выгода</th>
+                                <th className="coupon-table__th">Описание</th>
+                                <th className="coupon-table__th">Важно</th>
                             </tr>
                             </tfoot>
                             <tbody>
@@ -157,19 +178,18 @@ export  default class CouponsTable extends Component{
                                     {row.code}
                                 </td>
                                 <td className="coupon-table-row__price is-narrow-tablet has-text-centered-mobile">
-                                    <p className="label is-hidden-tablet">Цена</p>
                                     {row['price']}
                                 </td>
                                 <td className="coupon-table-row__actual-price has-text-danger is-narrow-tablet has-text-centered-mobile">
-                                    <p className="label is-hidden-tablet">Без купона</p>
                                     {row['actual_price']}
                                 </td>
                                 <td className="coupon-table-row__value has-text-success is-narrow-tablet has-text-centered-mobile">
-                                    <p className="label is-hidden-tablet">Выгода</p>
                                     {this.calculate_value(row['price'], row['actual_price'])} </td>
                                 <td className="coupon-table-row__description is-narrow-tablet">
-                                    <p className="label is-hidden-tablet">Описание</p>
                                     {row['description']}
+                                </td>
+                                <td className="coupon-table-row__description is-narrow-tablet has-text-danger">
+                                    {row['extra']}
                                 </td>
                             </tr>)}
                             </tbody>
