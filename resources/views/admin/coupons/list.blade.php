@@ -7,12 +7,14 @@
         <thead>
             <tr>
                 <th>Название</th>
+                <th>Описание</th>
                 <th></th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th>Название</th>
+                <th>Описание</th>
                 <th></th>
             </tr>
         </tfoot>
@@ -20,6 +22,7 @@
             @foreach ($coupons as $coupon)
                 <tr>
                     <td>{{$coupon->code}}</td>
+                    <td>{{$coupon->description}}</td>
                     <td class="is-narrow">
                         <a href="{{route('coupons.edit',['coupon'=>$coupon])}}">
                             <button class="button is-warning">Изменить</button>
