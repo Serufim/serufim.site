@@ -7,6 +7,7 @@ export default class Chat extends Component{
     constructor(props){
         super(props);
         this.state={
+            chatStatus:null,
             login:false,
             messages:[],
             message:"",
@@ -16,26 +17,40 @@ export default class Chat extends Component{
             loginError:false,
             loginErrorMessage:"",
             needScroll:false,
-        }
+        };
+        this.socket = null;
         this.handleChandge = this.handleChandge.bind(this)
         this.login = this.login.bind(this)
         this.updateUsers = this.updateUsers.bind(this)
         this.sendMessage = this.sendMessage.bind(this)
     }
-    componentDidMount() {
+    async componentDidMount() {
+        await this.checkChat();
         const {messages} = this.state;
-        socket.on('connect',()=>console.log('Подключено'));
-        socket.on('disconnect',()=>console.log('Отключено'));
-        socket.on('user_stat',(data)=>this.updateUsers(data));
-        socket.on('login_error',(data)=>this.setState({loginError:true,loginErrorMessage:data.message}));
-        socket.on('login_success',()=>this.setState({login:true}));
-        socket.on('connect_failed', function() {
+        this.socket.on('connect',()=>console.log('Подключено'));
+        this.socket.on('disconnect',()=>console.log('Отключено'));
+        this.socket.on('user_stat',(data)=>this.updateUsers(data));
+        this.socket.on('login_error',(data)=>this.setState({loginError:true,loginErrorMessage:data.message}));
+        this.socket.on('login_success',()=>this.setState({login:true}));
+        this.socket.on('connect_failed', function() {
             document.write("Sorry, there seems to be an issue with the connection!");
         });
-        socket.on('reply',(data)=>{
+        this.socket.on('reply',(data)=>{
             messages.push(data);
             this.setState({messages:messages})
         });
+    }
+
+    async checkChat() {
+        await axios.get(process.env.CHAT_URL+'/check')
+            .then(resp => {
+                if (resp.data.power){
+                    this.setState({chatStatus:"on"});
+                    this.socket = io(process.env.CHAT_URL+'/chat')
+                }else
+                    this.setState({chatStatus:"off"})
+            })
+                        .catch(err => this.setState({chatStatus:"off"}));
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -61,30 +76,29 @@ export default class Chat extends Component{
         let token = document.head.querySelector('meta[name="admin-token"]');
         if(token)
             token= token.content;
-        socket.emit('login',{name:name,token:token});
+        this.socket.emit('login',{name:name,token:token});
         this.setState({name:""});
     }
     sendMessage(e){
         e.preventDefault();
         const {message} = this.state;
-        socket.emit('chat_message',message);
+
+        this.socket.emit('chat_message',message);
         this.setState({message:"",needScroll:true});
     }
     render() {
-        const {login, name, messages, message, loginError, loginErrorMessage, users, slaves} = this.state;
+        const {chatStatus, login, name, messages, message, loginError, loginErrorMessage, users, slaves} = this.state;
         return(
             <div className="chat container container--with-paddings">
                 <h1 className="title is-1 has-text-centered">@Seruchat</h1>
                 <p className="subtitle has-text-centered">Прогрессивный веб чат</p>
-                <div className="chat__slaves-count" style={{textAlign:"right"}}>
-                    <span className="chat__slaves-connected has-text-grey-light">Подключено</span>
-
-                    <p className="chat__slaves-counter">
-                        <span className="has-text-grey-light">{slaves}</span>/<span className="has-text-info">{users}</span>
-                    </p>
-                    <span className="chat__slaves-connected has-text-info" style={{textAlign:"left"}}>В чате</span>
+                <div className="chat__slaves-count">
+                    <span className="chat__slaves-connected has-text-grey-light">Подключено: {slaves} </span>
+                    <span className="chat__slaves-connected has-text-info">В чате: {users} </span>
+                    <span className="chat__slaves-connected has-text-danger">Админов: {users} </span>
                 </div>
                 <div className="chat__box">
+                    <div className="chat__box-modal has-text-danger">{chatStatus==="off"?"Чат отключен, приходите потом":null}</div>
                     {messages.map((message, i) => <div key={i} className="chat__message message box"><span
                         className={message.admin?"has-text-danger":"has-text-info"}>{message.name}</span> {message.message}</div>)}
                 </div>
@@ -125,6 +139,6 @@ export default class Chat extends Component{
     }
 }
 if (document.getElementById('chat')){
-    var socket = io('https://serufim.site/chat');
+
     ReactDOM.render(<Chat />, document.getElementById('chat'));
 }

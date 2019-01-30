@@ -4,6 +4,7 @@
 }
 .chat__box{
     height: 56vh;
+    position: relative;
     max-height: 56vh;
     position: relative;
     display: flex;
@@ -13,6 +14,16 @@
     border: 2px solid black;
     border-radius: 15px;
 }
+.chat__box-modal{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
 
 .chat__box>:first-child{
     margin-top: auto !important;
@@ -21,10 +32,6 @@
     margin-bottom: 0.5rem;
 }
 .chat__slaves-count{
-   display: flex;
-    justify-content: space-between;
-    width: 300px;
-    margin: 0 auto;
 }
 .chat__slaves-connected{
     width: 130px;

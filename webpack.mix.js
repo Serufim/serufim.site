@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const Dotenv = require('dotenv-webpack');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -13,4 +13,9 @@ const mix = require('laravel-mix');
 
 mix.react('resources/js/app.js', 'public/js')
    .sass('resources/sass/main/main.scss', 'public/css')
-   .sass('resources/sass/admin/admin.scss', 'public/css');
+   .sass('resources/sass/admin/admin.scss', 'public/css')
+    .webpackConfig({
+        plugins: [
+            new Dotenv({path:'./front.env'})
+        ],
+    });

@@ -43,6 +43,9 @@
             <a class="navbar-item" href="{{route('coupons')}}">
                 Секретные купоны
             </a>
+            <a class="navbar-item" href="{{route('chat')}}">
+                Seruchat
+            </a>
             @auth
                 <a class="navbar-item" href="{{route('admin')}}">
                     Админка

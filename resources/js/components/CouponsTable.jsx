@@ -23,13 +23,12 @@ export  default class CouponsTable extends Component{
         this.sort_table = this.sort_table.bind(this);
         this.sort_by_type = this.sort_by_type.bind(this);
         this.toogleFilter = this.toogleFilter.bind(this);
+        this.copyCoupon = this.copyCoupon.bind(this);
     }
     componentWillMount() {
         axios.get('/api/coupons').then(resp=>{
             resp.data.data.forEach(item=>{
-                let percent = this.calculate_percent(item.actual_price, item.price);
-                console.log(percent)
-                item.value = percent;
+                item.value = this.calculate_percent(item.actual_price, item.price);
             });
             this.setState({table:resp.data.data,render_table:resp.data.data,loading:false})
         });
@@ -93,6 +92,26 @@ export  default class CouponsTable extends Component{
 
 
     }
+    copyCoupon(e,i){
+        // Выборка ссылки с электронной почтой
+        var coupon = e.target;
+        var range = document.createRange();
+        var table = this.state.render_table;
+        range.selectNode(coupon);
+        window.getSelection().addRange(range);
+
+        try {
+            // Теперь, когда мы выбрали текст ссылки, выполним команду копирования
+            var successful = document.execCommand('copy');
+            table[i].copied = successful? true:false;
+        } catch(err) {
+            table[i].copied = false;
+        }
+        this.setState({render_table:table});
+        setTimeout(()=>{table[i].copied=null;this.setState({render_table:table})},2000);
+
+        window.getSelection().removeAllRanges();
+    }
     render() {
         const {loading,render_table,sortingMethod,types,filters_open} = this.state;
         return(
@@ -102,7 +121,7 @@ export  default class CouponsTable extends Component{
                 {loading ? "Загрузка" :
                     <div>
                     <MediaQuery query="(min-device-width: 1024px)">
-
+                        <p>Нажмите на купон что бы скопировать</p>
                         <table className="coupon-table table is-hoverable ">
                             <thead>
                             <tr>
@@ -174,7 +193,7 @@ export  default class CouponsTable extends Component{
                             {render_table.map((row, i) => <tr key={row.id} className="coupon-table-row">
                                 <td className="coupon-table-row__type is-narrow-tablet">
                                     {row['type']['name']}</td>
-                                <td className="coupon-table-row__code has-text-info is-narrow-tablet">
+                                <td className={`coupon-table-row__code has-text-info is-narrow-tablet${row.copied?" has-text-success":"has-text-danger"}`} onClick={(e)=>this.copyCoupon(e,i)}>
                                     {row.code}
                                 </td>
                                 <td className="coupon-table-row__price is-narrow-tablet has-text-centered-mobile">
@@ -249,11 +268,12 @@ export  default class CouponsTable extends Component{
                                 :null}
                         </div>
                         <div className="coupons">
+                            <p>Нажмите на купон что бы скопировать</p>
                         {render_table.map((row, i) =>
                             <div key={row.id} className="coupon box is-rounded">
-                                <h3 className="coupon__code title is-5 has-text-info">
+                                <div className={`coupon__code title is-5${row.copied==true?" has-text-success":row.copied==false?" has-text-danger":" has-text-info"}`} onClick={(e)=>this.copyCoupon(e,i)}>
                                     {row.code}
-                                </h3>
+                                </div>
                                 <h4 className="coupon__type title is-5">
                                     {row['type']['name']}
                                 </h4>
