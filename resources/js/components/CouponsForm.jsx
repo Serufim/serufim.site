@@ -54,7 +54,6 @@ export default class CouponsTable extends Component {
         const {status, verified,shouldCaptchaRefresh,site_key} = this.state
         return (
             <section className="container">
-                {site_key}
                 <h3 className="coupons_title title is-3 is-size-4-mobile">Знаете купоны, которые не знаем мы?</h3>
                 <p className="coupons_subtitle subtitle">Обязательно напишите нам об этом</p>
                 <div className="columns">
