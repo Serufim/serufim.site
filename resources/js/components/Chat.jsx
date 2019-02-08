@@ -13,6 +13,7 @@ export default class Chat extends Component{
             message:"",
             name:"",
             users:0,
+            admins:0,
             slaves:0,
             loginError:false,
             loginErrorMessage:"",
@@ -21,6 +22,7 @@ export default class Chat extends Component{
         this.socket = null;
         this.handleChandge = this.handleChandge.bind(this)
         this.login = this.login.bind(this)
+        this.logout = this.logout.bind(this)
         this.updateUsers = this.updateUsers.bind(this)
         this.sendMessage = this.sendMessage.bind(this)
     }
@@ -63,12 +65,19 @@ export default class Chat extends Component{
         }
     }
     updateUsers(data){
-        this.setState({users:data.users,slaves:data.slaves})
+        this.setState({users:data.users,slaves:data.slaves,admins:data.admins})
     }
     handleChandge(field,e){
         let {state} = this;
         state[field] = e.target.value;
         this.setState(state)
+    }
+    logout(){
+        if(confirm("Вы точно хотите выйти???")){
+            this.socket.emit('logout');
+            this.setState({login:false});
+        }
+
     }
     login(e){
         e.preventDefault();
@@ -87,7 +96,7 @@ export default class Chat extends Component{
         this.setState({message:"",needScroll:true});
     }
     render() {
-        const {chatStatus, login, name, messages, message, loginError, loginErrorMessage, users, slaves} = this.state;
+        const {admins, chatStatus, login, name, messages, message, loginError, loginErrorMessage, users, slaves} = this.state;
         return(
             <div className="chat container container--with-paddings">
                 <h1 className="title is-1 has-text-centered">@Seruchat</h1>
@@ -95,7 +104,7 @@ export default class Chat extends Component{
                 <div className="chat__slaves-count">
                     <span className="chat__slaves-connected has-text-grey-light">Подключено: {slaves} </span>
                     <span className="chat__slaves-connected has-text-info">В чате: {users} </span>
-                    <span className="chat__slaves-connected has-text-danger">Админов: {users} </span>
+                    <span className="chat__slaves-connected has-text-danger">Админов: {admins} </span>
                 </div>
                 <div className="chat__box">
                     <div className="chat__box-modal has-text-danger">{chatStatus==="off"?"Чат отключен, приходите потом":null}</div>
@@ -112,6 +121,7 @@ export default class Chat extends Component{
                                 </div>
                                 <div className="control">
                                     <button type="submit" className="button is-primary">Отправить</button>
+                                    <button type="button" className="button is-danger" onClick={this.logout}>Выйти</button>
                                 </div>
                             </div>
                         </form>:

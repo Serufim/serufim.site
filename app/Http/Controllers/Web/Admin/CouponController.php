@@ -41,7 +41,7 @@ class CouponController extends Controller
         $validatedData = $request->validate([
             'code' => 'string|required|max:255',
             'description' => 'string|required',
-            'price' => 'integer|required',
+            'price' => 'integer|nullable',
             'type_id' => 'integer|required',
             'actual_price' => 'integer|nullable',
             'extra' => 'string|nullable',
@@ -86,7 +86,7 @@ class CouponController extends Controller
         $validatedData = $request->validate([
             'code' => 'string|required|max:255',
             'description' => 'string|required',
-            'price' => 'integer|required',
+            'price' => 'integer|nullable',
             'type_id' => 'integer|required',
             'actual_price' => 'integer|nullable',
             'extra' => 'string|nullable',

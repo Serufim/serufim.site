@@ -1,28 +1,30 @@
 import Captcha from './Captcha'
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Reaptcha from 'reaptcha';
 
 export default class CouponsTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
             message: "",
+            captcha:"",
             loading: false,
             status: "",
             verified:false,
-            token:"",
-            hashes:512 //TODO: Поставить 512
+            site_key:process.env.CAPTCHA_SITE_KEY
         };
         this.childRef = React.createRef();
         this.sendMessage = this.sendMessage.bind(this);
+        this.verifyCallback = this.verifyCallback.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
     async sendMessage(e) {
         //Отправляем короч на сервер
         e.preventDefault();
         this.setState({loading: true});
-        const {message,token,hashes} = this.state;
-        await axios.post('/api/send_coupon', {message: message,token:token,hashes:hashes}).then(resp => {
+        const {message,captcha} = this.state;
+        await axios.post('/api/send_coupon', {message: message,captcha:captcha}).then(resp => {
             if (resp.data.status ==="success")
                 this.setState({status: "success",message:"",verified:false}, () => {
                     setTimeout(() => this.setState({status: ""}), 2000)
@@ -37,15 +39,19 @@ export default class CouponsTable extends Component {
                     setTimeout(() => this.setState({status: ""}), 2000)
                 });
             });
-        this.childRef.current.reloadCaptcha();
+        this.captcha.reset()
     }
 
     handleChange(event) {
         this.setState({message: event.target.value});
     }
 
+    verifyCallback(response) {
+        this.setState({captcha:response,verified:true})
+    };
+
     render() {
-        const {status, verified,shouldCaptchaRefresh} = this.state
+        const {status, verified,shouldCaptchaRefresh,site_key} = this.state
         return (
             <section className="container">
                 <h3 className="coupons_title title is-3 is-size-4-mobile">Знаете купоны, которые не знаем мы?</h3>
@@ -62,19 +68,12 @@ export default class CouponsTable extends Component {
                             </div>
                             <p className={`help ${status === "error" ? "is-danger" : null} ${status === "success" ? "is-success" : null}`}>{status === "error" ? "Произошла ошибка, попробуйте позже" : null} {status === "success" ? "Форма успешно отправлена" : null}</p>
                         </div>
-                        <Captcha ref={this.childRef} maxHash={512} shouldCheking={false} onComplete={(token,hashes)=>
-                            this.setState({
-                                verified:true,
-                                token:token,
-                                hashes:hashes})}>
-                            <button className="captcha__checkbox" >
-                                        <span className="captcha__checkbox-icon icon">
-                                            <i className="fas fa-check"></i>
-                                        </span>
-                            </button>
-                            <span>Я не робот</span>
-                        </Captcha>
-                        <div className="buttons">
+                        <Reaptcha
+                            ref={e => (this.captcha = e)}
+                            sitekey={site_key}
+                            onVerify={this.verifyCallback}
+                        />
+                        <div className="buttons" style={{marginTop:"0.5rem"}}>
                             <button type="submit" className="button is-primary" disabled={!verified}>Отправить</button>
                         </div>
                     </form>

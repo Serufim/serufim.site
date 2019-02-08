@@ -197,13 +197,13 @@ export  default class CouponsTable extends Component{
                                     {row.code}
                                 </td>
                                 <td className="coupon-table-row__price is-narrow-tablet has-text-centered-mobile">
-                                    {row['price']}
+                                    {row['price']?row['price']:"-"}
                                 </td>
                                 <td className="coupon-table-row__actual-price has-text-danger is-narrow-tablet has-text-centered-mobile">
-                                    {row['actual_price']}
+                                    {row['actual_price']?row['actual_price']:"-"}
                                 </td>
                                 <td className="coupon-table-row__value has-text-success is-narrow-tablet has-text-centered-mobile">
-                                    {this.calculate_value(row['price'], row['actual_price'])} </td>
+                                    {row['price']?this.calculate_value(row['price'], row['actual_price']):"-"} </td>
                                 <td className="coupon-table-row__description is-narrow-tablet">
                                     {row['description']}
                                 </td>
@@ -283,16 +283,16 @@ export  default class CouponsTable extends Component{
                                 </div>
                                 <div className="coupon__price has-text-centered">
                                     <strong>Цена</strong>
-                                    <p className="has-text-success">{row.price}</p>
+                                    <p className="has-text-success">{row.price?row.price:"-"}</p>
                                 </div>
                                 <div className="coupon__actual_price has-text-centered">
                                     <strong>Без купона</strong>
-                                    <p className="has-text-danger">{row.actual_price}</p>
+                                    <p className="has-text-danger">{row.actual_price?row.actual_price:"-"}</p>
                                 </div>
                                 <div className="coupon__value has-text-centered">
                                     <strong>Выгода</strong>
                                     <p className="has-text-success">
-                                        {this.calculate_value(row['price'], row['actual_price'])}
+                                        {row['price']?this.calculate_value(row['price'], row['actual_price']):"-"}
                                     </p>
                                 </div>
                                 {row.extra?<div className="coupon__extra">

@@ -64,5 +64,7 @@
     @yield('content')
 </section>
 <script src="{{asset('js/app.js')}}"></script>
+{{--<script src="https://www.google.com/recaptcha/api.js" async defer></script>--}}
+
 </body>
 </html>
