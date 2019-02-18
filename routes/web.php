@@ -60,6 +60,9 @@ Route::namespace('Web\Admin')
                 'index' => 'coupon_from_readers.index',
                 'destroy' => 'coupon_from_readers.destroy',
             ]]);
+            Route::resource('/coupon_analitics', "CouponAnaliticsController",['names' => [
+                'index' => 'coupon_analitics.index',
+            ]]);
         });
 });
 

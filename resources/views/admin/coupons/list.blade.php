@@ -32,4 +32,6 @@
             @endforeach
         </tbody>
     </table>
+    {{ $coupons->links() }}
+
 @endsection

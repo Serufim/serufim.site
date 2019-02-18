@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">
@@ -70,6 +71,7 @@
                                 </ul>
                             </li>
                             <li><a class="{{Route::currentRouteName()=='coupon_from_readers.index'?'is-active':null}}" href="{{route('coupon_from_readers.index')}}">Купоны пользователей</a></li>
+                            <li><a class="{{Route::currentRouteName()=='coupon_analitics.index'?'is-active':null}}" href="{{route('coupon_analitics.index')}}">Аналитика</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -79,7 +81,7 @@
             </section>
         </div>
     </div>
-
+    <script src="{{asset('js/app.js')}}"></script>
 </div>
 </body>
 </html>

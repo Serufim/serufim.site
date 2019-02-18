@@ -15,7 +15,7 @@ class AddTypeFieldIntoCouponsTable extends Migration
     {
         Schema::table('coupons', function (Blueprint $table) {
             $table->integer('type_id')->nullable();
-            $table->foreign('type_id')->references('id')->on('coupon_types')->onDelete('cascade');;
+            $table->foreign('type_id')->references('id')->on('coupon_types')->onDelete('cascade');
 
         });
     }

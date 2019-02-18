@@ -16,7 +16,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        return view('admin.coupons.list',["coupons"=>Coupon::all()]);
+        return view('admin.coupons.list',["coupons"=>Coupon::paginate(5)]);
     }
 
     /**

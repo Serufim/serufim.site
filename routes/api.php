@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')
     ->group(function (){
         Route::get('/coupons', 'CouponController@index');
+        Route::apiResource('/coupon_copies', 'CouponCopiesController')->only(['index','store']);
         Route::get('/coupon_types', 'CouponTypeController@index');
         Route::post('/send_coupon', 'CouponsFromReadersController@store');
         Route::post('/check_token', 'CaptchaController@check');

@@ -108,6 +108,7 @@ export  default class CouponsTable extends Component{
             table[i].copied = false;
         }
         this.setState({render_table:table});
+        axios.post('/api/coupon_copies',{coupon_id:table[i].id});
         setTimeout(()=>{table[i].copied=null;this.setState({render_table:table})},2000);
 
         window.getSelection().removeAllRanges();
