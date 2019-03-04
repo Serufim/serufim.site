@@ -16,7 +16,24 @@ class CouponController extends Controller
      */
     public function index()
     {
-        return view('admin.coupons.list',["coupons"=>Coupon::paginate(5)]);
+        return view('admin.coupons.list',["coupons"=>Coupon::paginate(20)]);
+    }
+
+    public function trashed_index()
+    {
+        return view('admin.coupons.trashed',["coupons"=>Coupon::onlyTrashed()->paginate(20)]);
+    }
+
+    public function restore($id)
+    {
+        Coupon::withTrashed()->find($id)->restore();
+        return redirect()->route('coupons.index');
+    }
+
+    public function force($id)
+    {
+        Coupon::withTrashed()->find($id)->forceDelete();
+        return redirect()->route('coupons.trashed');
     }
 
     /**

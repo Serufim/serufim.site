@@ -38,6 +38,9 @@ Route::namespace('Web\Admin')
                 'update' => 'projects.update',
                 'destroy' => 'projects.destroy',
             ]]);
+            Route::get('/coupons/trashed', 'CouponController@trashed_index')->name('coupons.trashed');
+            Route::get('/coupons/trashed/{coupon}/restore', 'CouponController@restore')->name('coupons.restore');
+            Route::get('/coupons/trashed/{coupon}/force', 'CouponController@force')->name('coupons.force');
             Route::resource('/coupons', "CouponController",['names' => [
                 'index' => 'coupons.index',
                 'create' => 'coupons.create',
@@ -55,6 +58,24 @@ Route::namespace('Web\Admin')
                 'edit' => 'coupon_types.edit',
                 'update' => 'coupon_types.update',
                 'destroy' => 'coupon_types.destroy',
+            ]]);
+            Route::resource('/questions', "QuestionController",['names' => [
+                'index'  => 'questions.index',
+                'create' => 'questions.create',
+                'store'  => 'questions.store',
+                'show'   => 'questions.show',
+                'edit'   => 'questions.edit',
+                'update' => 'questions.update',
+                'destroy'=> 'questions.destroy',
+            ]]);
+            Route::resource('/{question_id}/choice', "ChoiceController",['names' => [
+                'index'  => 'choice.index',
+                'create' => 'choice.create',
+                'store'  => 'choice.store',
+                'show'   => 'choice.show',
+                'edit'   => 'choice.edit',
+                'update' => 'choice.update',
+                'destroy'=> 'choice.destroy',
             ]]);
             Route::resource('/coupons_from_readers', "CouponsFromReadersController",['names' => [
                 'index' => 'coupon_from_readers.index',

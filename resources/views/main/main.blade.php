@@ -14,4 +14,17 @@
             </div>
         </div>
     </section>
+    <section class="release-calendar">
+        <div class="container">
+            <h2 class="title">Календарь релизов</h2>
+            <div class="release-note">
+                <div class="date box is-rounded">20<br>Фев</div>
+                <div class="description box">Софт делиты в базе, пагинация. И самое главное голосовалки теперь доступны</div>
+            </div>
+            <div class="release-note">
+                <div class="date box is-rounded">20<br>Фев</div>
+                <div class="description box">Софт делиты в базе, пагинация. И самое главное голосовалки теперь доступны</div>
+            </div>
+        </div>
+    </section>
 @endsection

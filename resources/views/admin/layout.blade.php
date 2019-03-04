@@ -65,6 +65,7 @@
                         <a class="{{Route::currentRouteName()=='coupons.index'?'is-active':null}}" href="{{route('coupons.index')}}" style="">Купоны</a>
                         <ul>
                             <li><a class="{{Route::currentRouteName()=='coupons.create'?'is-active':null}}" href="{{route('coupons.create')}}">Добавить новый</a></li>
+                            <li><a class="{{Route::currentRouteName()=='coupons.trashed'?'is-active':null}}" href="{{route('coupons.trashed')}}">Удаленые купоны</a></li>
                             <li><a class="{{Route::currentRouteName()=='coupon_types.index'?'is-active':null}}" href="{{route('coupon_types.index')}}">Типы купонов</a>
                                 <ul>
                                     <li><a class="{{Route::currentRouteName()=='coupon_types.create'?'is-active':null}}" href="{{route('coupon_types.create')}}">Добавить</a></li>
@@ -72,6 +73,12 @@
                             </li>
                             <li><a class="{{Route::currentRouteName()=='coupon_from_readers.index'?'is-active':null}}" href="{{route('coupon_from_readers.index')}}">Купоны пользователей</a></li>
                             <li><a class="{{Route::currentRouteName()=='coupon_analitics.index'?'is-active':null}}" href="{{route('coupon_analitics.index')}}">Аналитика</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="{{Route::currentRouteName()=='questions.index'?'is-active':null}}" href="{{route('questions.index')}}" style="">Опросы</a>
+                        <ul>
+                            <li><a class="{{Route::currentRouteName()=='questions.create'?'is-active':null}}" href="{{route('questions.create')}}">Добавить новый</a></li>
                         </ul>
                     </li>
                 </ul>
