@@ -20,8 +20,12 @@
         <div class="rsya rsya--right"><!-- Yandex.RTB R-A-348495-1 -->
             <div id="yandex_rtb_R-A-348495-1"></div>
         </div>
+        <!-- Yandex.RTB R-A-357488-2 -->
+        <div id="yandex_rtb_R-A-357488-2"></div>
         <section id="table" class="table">
         </section>
+        <!-- Yandex.RTB R-A-357488-3 -->
+        <div id="yandex_rtb_R-A-357488-3"></div>
         <section id="coupon_ref"></section>
         <div id="coupon_form"></div>
         <div class="rsya rsya--right">
@@ -55,6 +59,44 @@
                 Ya.Context.AdvManager.render({
                     blockId: "R-A-357488-1",
                     renderTo: "yandex_rtb_R-A-357488-1",
+                    async: true
+                });
+            });
+            t = d.getElementsByTagName("script")[0];
+            s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "//an.yandex.ru/system/context.js";
+            s.async = true;
+            t.parentNode.insertBefore(s, t);
+        })(this, this.document, "yandexContextAsyncCallbacks");
+    </script>
+
+    <script type="text/javascript">
+        (function(w, d, n, s, t) {
+            w[n] = w[n] || [];
+            w[n].push(function() {
+                Ya.Context.AdvManager.render({
+                    blockId: "R-A-357488-2",
+                    renderTo: "yandex_rtb_R-A-357488-2",
+                    async: true
+                });
+            });
+            t = d.getElementsByTagName("script")[0];
+            s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "//an.yandex.ru/system/context.js";
+            s.async = true;
+            t.parentNode.insertBefore(s, t);
+        })(this, this.document, "yandexContextAsyncCallbacks");
+    </script>
+
+    <script type="text/javascript">
+        (function(w, d, n, s, t) {
+            w[n] = w[n] || [];
+            w[n].push(function() {
+                Ya.Context.AdvManager.render({
+                    blockId: "R-A-357488-3",
+                    renderTo: "yandex_rtb_R-A-357488-3",
                     async: true
                 });
             });
